@@ -6,16 +6,17 @@ MAINTAINER Opal Raava <opalraava@riseup.net>
 RUN apt-get update && apt-get upgrade -y
 
 # requirements: sshd
-RUN apt-get -y install openssh-server openssh-clients
+RUN apt-get -y install openssh-server openssh-client
 RUN ssh-keygen -A
 RUN sed -Ei "s/^PermitRootLogin.*/PermitRootLogin no/" /etc/ssh/sshd_config
 RUN mkdir /var/run/sshd
 
 RUN adduser build
 RUN mkdir /home/build/.ssh
-COPY ../authorized_keys /home/build/.ssh/authorized_keys
+COPY authorized_keys /home/build/.ssh/authorized_keys
 RUN chmod 755 /home/build/.ssh
 RUN chmod 644 /home/build/.ssh/authorized_keys
+COPY src /home/build/tests
 RUN chown -R build:build /home/build
 
 EXPOSE 22

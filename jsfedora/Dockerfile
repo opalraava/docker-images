@@ -13,7 +13,7 @@ RUN mkdir /var/run/sshd
 
 RUN adduser build
 RUN mkdir /home/build/.ssh
-COPY ../authorized_keys /home/build/.ssh/authorized_keys
+COPY authorized_keys /home/build/.ssh/authorized_keys
 RUN chmod 755 /home/build/.ssh
 RUN chmod 644 /home/build/.ssh/authorized_keys
 RUN chown -R build:build /home/build
