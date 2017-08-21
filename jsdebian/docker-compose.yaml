@@ -5,4 +5,4 @@ services:
     container_name: jsdebian_jsdebian
     restart: always
     ports:
-      - "22:22"
+      - "3322:22"

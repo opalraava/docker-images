@@ -1,7 +1,9 @@
 all :
-	@echo 'use: make up|remove|bash'
+	@echo 'use: make build|up|remove|bash'
+build :
+	docker-compose build
 up :
-	docker-compose up -d --build
+	docker-compose up -d
 remove :
 	docker-compose down
 bash:

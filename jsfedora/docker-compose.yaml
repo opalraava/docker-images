@@ -5,4 +5,4 @@ services:
     container_name: jsfedora_jsfedora
     restart: always
     ports:
-      - "22:22"
+      - "2233:22"
