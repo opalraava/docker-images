@@ -1,0 +1,8 @@
+version: '2'
+services:
+  jsfedora:
+    build: .
+    container_name: jsfedora_jsfedora
+    restart: always
+    ports:
+      - "22:22"
