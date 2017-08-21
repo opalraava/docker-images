@@ -1,6 +1,6 @@
 version: '2'
 services:
-  jsfedora:
+  jsdebian:
     build: .
     container_name: jsdebian_jsdebian
     restart: always

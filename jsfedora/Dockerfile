@@ -11,13 +11,17 @@ RUN ssh-keygen -A
 RUN sed -Ei "s/^PermitRootLogin.*/PermitRootLogin no/" /etc/ssh/sshd_config
 RUN mkdir /var/run/sshd
 
+# create 'build' user
 RUN adduser build
 RUN mkdir /home/build/.ssh
 COPY authorized_keys /home/build/.ssh/authorized_keys
 RUN chmod 755 /home/build/.ssh
 RUN chmod 644 /home/build/.ssh/authorized_keys
+COPY src /home/build/tests
 RUN chown -R build:build /home/build
 
+# c/c++ build environment
+RUN dnf -y install git make autoconf automake libtool gcc g++
 EXPOSE 22
 
 # init script
