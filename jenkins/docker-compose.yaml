@@ -25,11 +25,8 @@ services:
     build: gitserver
     container_name: gitserver
     restart: always
-    volumes:
-      - jenkins_gitserver:/home/git
 
 volumes:
   jenkins_home:
-  jenkins_gitserver:
 
 

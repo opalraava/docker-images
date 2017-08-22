@@ -1,5 +1,6 @@
-all :
+help :
 	@echo 'use: make build|showpass|up|remove|bash|bash-debian|bash-fedora'
+all : build
 build :
 	sudo docker-compose build
 up :

@@ -19,11 +19,12 @@ RUN adduser git
 RUN echo "git" | passwd --stdin git
 RUN chown -R git:git /home/git
 
-#WORKDIR /home/git
-#RUN git init --bare hello.git && chown -R git:git hello.git
-#COPY src /home/build/tests
+# copy in some test repos
+#COPY repos /home/git/
+COPY repos/jsbuildbasicc.git /home/git/jsbuildbasicc.git
+COPY repos/jsbuildtestc.git /home/git/jsbuildtestc.git
+COPY repos/jsbuildtestcxx.git /home/git/jsbuildtestcxx.git
 
-VOLUME /home/git
 EXPOSE 22
 
 # init script

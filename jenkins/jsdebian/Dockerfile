@@ -35,7 +35,6 @@ RUN mkdir -p /home/build/.ssh
 RUN touch /home/build/.ssh/authorized_keys
 RUN chmod 755 /home/build/.ssh
 RUN chmod 644 /home/build/.ssh/authorized_keys
-COPY src /home/build/tests
 RUN chown -R build:build /home/build
 
 
