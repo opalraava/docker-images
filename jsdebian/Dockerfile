@@ -20,9 +20,9 @@ RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
 ENV LANG en_US.UTF-8
 
 # create 'build' user
-RUN adduser build
+RUN adduser --password build build
 RUN mkdir /home/build/.ssh
-COPY authorized_keys /home/build/.ssh/authorized_keys
+RUN touch /home/build/.ssh/authorized_keys
 RUN chmod 755 /home/build/.ssh
 RUN chmod 644 /home/build/.ssh/authorized_keys
 COPY src /home/build/tests

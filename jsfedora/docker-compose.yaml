@@ -1,4 +1,10 @@
 version: '2'
+
+networks:
+  jenkins_slaves:
+    external:
+      name: jenkins_slaves
+
 services:
   jsfedora:
     build: .
@@ -6,3 +12,7 @@ services:
     restart: always
     ports:
       - "2233:22"
+    networks:
+      - default
+      - jenkins_slaves
+      

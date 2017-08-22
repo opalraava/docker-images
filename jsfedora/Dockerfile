@@ -9,19 +9,24 @@ RUN dnf -y update
 RUN dnf -y install openssh-server openssh-clients
 RUN ssh-keygen -A
 RUN sed -Ei "s/^PermitRootLogin.*/PermitRootLogin no/" /etc/ssh/sshd_config
-RUN mkdir /var/run/sshd
+RUN mkdir -p /var/run/sshd
+
+# system and basic utilities
+RUN dnf -y install passwd
 
 # create 'build' user
 RUN adduser build
+RUN echo "build" | passwd --stdin build
 RUN mkdir /home/build/.ssh
-COPY authorized_keys /home/build/.ssh/authorized_keys
+RUN touch /home/build/.ssh/authorized_keys
 RUN chmod 755 /home/build/.ssh
 RUN chmod 644 /home/build/.ssh/authorized_keys
 COPY src /home/build/tests
 RUN chown -R build:build /home/build
 
 # c/c++ build environment
-RUN dnf -y install git make autoconf automake libtool gcc g++
+RUN dnf -y install git make autoconf automake libtool gettext pkgconfig gcc gcc-c++
+
 EXPOSE 22
 
 # init script
