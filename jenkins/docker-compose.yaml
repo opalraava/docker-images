@@ -1,6 +1,7 @@
 version: '2'
 
 services:
+
   jenkins:
     image: jenkins:latest
     restart: always
@@ -20,6 +21,17 @@ services:
     container_name: jsfedora
     restart: always
 
+  git:
+    image: jkarlos/git-server-docker
+    container_name: git
+    restart: always
+    volumes:
+      - jenkins_keys:/git-server/keys
+      - jenkins_repos:/git-server/repos
+
 volumes:
   jenkins_home:
+  jenkins_keys:
+  jenkins_repos:
+
 
