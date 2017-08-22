@@ -6,7 +6,7 @@ services:
     restart: always
     container_name: jenkins
     ports:
-      - 8082:8080
+      - 8080:8080
     volumes:
       - jenkins_home:/var/jenkins_home
 
@@ -14,15 +14,12 @@ services:
     build: jsdebian
     container_name: jsdebian
     restart: always
-    ports:
-      - "22:22"
 
   jsfedora:
     build: jsfedora
     container_name: jsfedora
     restart: always
-    ports:
-      - "22:22"
 
 volumes:
   jenkins_home:
+

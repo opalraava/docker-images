@@ -11,8 +11,8 @@ RUN ssh-keygen -A
 RUN sed -Ei "s/^PermitRootLogin.*/PermitRootLogin no/" /etc/ssh/sshd_config
 RUN mkdir -p /var/run/sshd
 
-# system and basic utilities
-RUN dnf -y install passwd
+# system and basic utilities, java for jenkins
+RUN dnf -y install passwd java-1.8.0-openjdk-devel
 
 # create 'build' user
 RUN adduser build
@@ -23,6 +23,7 @@ RUN chmod 755 /home/build/.ssh
 RUN chmod 644 /home/build/.ssh/authorized_keys
 COPY src /home/build/tests
 RUN chown -R build:build /home/build
+
 
 # c/c++ build environment
 RUN dnf -y install git make autoconf automake libtool gettext pkgconfig gcc gcc-c++
