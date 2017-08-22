@@ -10,5 +10,19 @@ services:
     volumes:
       - jenkins_home:/var/jenkins_home
 
+  jsdebian:
+    build: jsdebian
+    container_name: jsdebian
+    restart: always
+    ports:
+      - "22:22"
+
+  jsfedora:
+    build: jsfedora
+    container_name: jsfedora
+    restart: always
+    ports:
+      - "22:22"
+
 volumes:
   jenkins_home:

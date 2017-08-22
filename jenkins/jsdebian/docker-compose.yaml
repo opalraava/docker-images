@@ -1,0 +1,8 @@
+version: '2'
+services:
+  jsdebian:
+    build: .
+    container_name: jsdebian_jsdebian
+    restart: always
+    ports:
+      - "3322:22"
