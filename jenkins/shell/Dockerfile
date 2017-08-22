@@ -11,21 +11,24 @@ RUN ssh-keygen -A
 RUN sed -Ei "s/^PermitRootLogin.*/PermitRootLogin no/" /etc/ssh/sshd_config
 RUN mkdir -p /var/run/sshd
 
+# enable X11
+#RUN echo X11Forwarding yes >> /etc/ssh/sshd_config
+#RUN echo X11UseLocalhost no >> /etc/ssh/sshd_config
+#RUN dnf -y install xauth xterm
+
 # install git
 RUN dnf -y install git passwd
 
-# create 'git' user (with 'git' password)
-RUN adduser git
-RUN echo "git" | passwd --stdin git
-RUN chown -R git:git /home/git
+# create 'user' user (with 'user' password)
+RUN adduser user
+RUN echo "user" | passwd --stdin user
+RUN chown -R user:user /home/user
 
-# copy in some test repos
-COPY repos/jsbuildbasicc.git /home/git/jsbuildbasicc.git
-COPY repos/jsbuildtestc.git /home/git/jsbuildtestc.git
-COPY repos/jsbuildtestcxx.git /home/git/jsbuildtestcxx.git
-RUN chown -R git:git /home/git
 
-VOLUME /home/git
+# user commands
+# RUN dnf -y install firefox emacs
+
+
 EXPOSE 22
 
 # init script
