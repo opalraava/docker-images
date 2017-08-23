@@ -11,21 +11,32 @@ RUN ssh-keygen -A
 RUN sed -Ei "s/^PermitRootLogin.*/PermitRootLogin no/" /etc/ssh/sshd_config
 RUN mkdir -p /var/run/sshd
 
+
+# create user: variable $username (with "$username" password)
+ENV username git
+
+RUN adduser $username
+RUN dnf -y install passwd
+RUN echo "$username" | passwd --stdin $username
+RUN chown -R $username:$username /home/$username
+
+# setup sudo for $username
+RUN dnf -y install sudo
+RUN echo "$username ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+
+
+
 # install git
-RUN dnf -y install git passwd
-
-# create 'git' user (with 'git' password)
-RUN adduser git
-RUN echo "git" | passwd --stdin git
-RUN chown -R git:git /home/git
-
+RUN dnf -y install git
 # copy in some test repos
-COPY repos/jsbuildbasicc.git /home/git/jsbuildbasicc.git
-COPY repos/jsbuildtestc.git /home/git/jsbuildtestc.git
-COPY repos/jsbuildtestcxx.git /home/git/jsbuildtestcxx.git
-RUN chown -R git:git /home/git
+COPY sample_repos/jsbuildbasicc.git   /home/$username/jsbuildbasicc.git
+COPY sample_repos/jsbuildtestc.git    /home/$username/jsbuildtestc.git
+COPY sample_repos/jsbuildtestcxx.git  /home/$username/jsbuildtestcxx.git
+RUN chown -R $username:$username /home/$username
 
-VOLUME /home/git
+
+
+VOLUME /home/$username
 EXPOSE 22
 
 # init script
