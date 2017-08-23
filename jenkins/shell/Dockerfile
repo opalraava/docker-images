@@ -14,7 +14,7 @@ RUN mkdir -p /var/run/sshd
 # enable X11
 #RUN echo X11Forwarding yes >> /etc/ssh/sshd_config
 #RUN echo X11UseLocalhost no >> /etc/ssh/sshd_config
-#RUN dnf -y install xauth xterm
+RUN dnf -y install xauth xterm
 
 # install git
 RUN dnf -y install git passwd
@@ -24,11 +24,23 @@ RUN adduser user
 RUN echo "user" | passwd --stdin user
 RUN chown -R user:user /home/user
 
+# setup sudo
+RUN dnf -y install sudo
+RUN echo 'user ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
+
 
 # user commands
-# RUN dnf -y install firefox emacs
+RUN dnf -y install firefox thunderbird chromium emacs gitk ddd
+RUN dnf -y install \
+    screen irssi links mc wget mutt gnupg2 \
+    iputils traceroute \
+    tig make autoconf automake libtool gettext gcc gcc-c++ gdb \
+    java-1.8.0-openjdk-devel maven
 
 
+
+
+VOLUME /home/user
 EXPOSE 22
 
 # init script

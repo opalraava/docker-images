@@ -1,17 +1,29 @@
 help :
-	@echo 'use: make build|showpass|up|remove|bash|bash-debian|bash-fedora'
+	@echo 'use: make build|showpass|up|remove|backup|bugout'
+	@echo '     make bash-jenkins|bash-debian|bash-fedora|bash-shell'
+
 all : build
 build :
-	sudo docker-compose build
+	docker-compose build
 up :
-	sudo docker-compose up -d
+	docker-compose up -d
 remove :
-	sudo docker-compose down
+	docker-compose down
 showpass :
-	sudo docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
-bash :
-	sudo docker exec -it jenkins bash
+	docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+
+
+bash-jenkins :
+	docker exec -it jenkins bash
 bash-debian :
-	sudo docker exec -it jsdebian bash
+	docker exec -it jsdebian bash
 bash-fedora :
-	sudo docker exec -it jsfedora bash
+	docker exec -it jsfedora bash
+bash-shell :
+	docker exec -it shell bash
+
+bugout : backup
+backup : remove
+	rm -f backup.tar backup.tar.gz
+	tar cvf backup.tar *
+	gzip -v9 backup.tar

@@ -6,8 +6,6 @@ services:
     image: jenkins:latest
     restart: always
     container_name: jenkins
-    ports:
-      - "8080:8080"
     volumes:
       - jenkins_home:/var/jenkins_home
 
@@ -34,8 +32,14 @@ services:
     restart: always
     ports:
       - "2233:22"
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
+    volumes:
+      - jenkins_user_home:/home/user
 
 volumes:
   jenkins_home:
   jenkins_repos:
+  jenkins_user_home:
 
