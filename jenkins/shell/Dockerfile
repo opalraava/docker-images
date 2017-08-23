@@ -12,35 +12,45 @@ RUN sed -Ei "s/^PermitRootLogin.*/PermitRootLogin no/" /etc/ssh/sshd_config
 RUN mkdir -p /var/run/sshd
 
 # enable X11
-#RUN echo X11Forwarding yes >> /etc/ssh/sshd_config
-#RUN echo X11UseLocalhost no >> /etc/ssh/sshd_config
 RUN dnf -y install xauth xterm
 
-# install git
-RUN dnf -y install git passwd
+# create user: variable $username (with "$username" password)
+ENV username user
 
-# create 'user' user (with 'user' password)
-RUN adduser user
-RUN echo "user" | passwd --stdin user
-RUN chown -R user:user /home/user
+RUN adduser $username
+RUN dnf -y install passwd
+RUN echo "$username" | passwd --stdin $username
+RUN chown -R $username:$username /home/$username
 
-# setup sudo
+# setup sudo for $username
 RUN dnf -y install sudo
-RUN echo 'user ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
-
-
-# user commands
-RUN dnf -y install firefox thunderbird chromium emacs gitk ddd
-RUN dnf -y install \
-    screen irssi links mc wget mutt gnupg2 \
-    iputils traceroute \
-    tig make autoconf automake libtool gettext gcc gcc-c++ gdb \
-    java-1.8.0-openjdk-devel maven
+RUN echo "$username ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 
 
 
-VOLUME /home/user
+# X11 commands: basic
+RUN dnf -y install firefox thunderbird chromium xpdf thunar gimp emacs vi vim gvim
+
+# console commands: basic
+RUN dnf -y install screen irssi links mc wget mutt gnupg2
+
+# networking commands: ip networking and internet
+RUN dnf -y install iputils hostname traceroute nmap
+
+# X11 commands: coding
+RUN dnf -y install gitk ddd
+
+# coding commands: c/c++
+RUN dnf -y install git tig make autoconf automake libtool gettext gcc gcc-c++ gdb
+
+# coding commands: java
+RUN dnf -y install java-1.8.0-openjdk-devel maven
+
+
+
+
+VOLUME /home/$username
 EXPOSE 22
 
 # init script
