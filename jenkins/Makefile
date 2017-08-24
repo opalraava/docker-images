@@ -1,6 +1,6 @@
 help :
 	@echo 'use: make build|showpass|up|remove|backup|bugout'
-	@echo '     make bash-jenkins|bash-debian|bash-fedora|bash-shell'
+	@echo '     make bash-jenkins|bash-debian|bash-fedora|bash-shell|bash-redmine|bash-db'
 
 all : build
 build :
@@ -21,6 +21,10 @@ bash-fedora :
 	docker exec -it jsfedora bash
 bash-shell :
 	docker exec -it shell bash
+bash-redmine :
+	docker exec -it redmine bash
+bash-db :
+	docker exec -it db bash
 
 bugout : backup
 backup : remove

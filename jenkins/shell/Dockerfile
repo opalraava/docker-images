@@ -36,7 +36,7 @@ RUN dnf -y install firefox thunderbird chromium xpdf thunar gimp emacs vi vim gv
 RUN dnf -y install screen irssi links mc wget mutt gnupg2
 
 # networking commands: ip networking and internet
-RUN dnf -y install iputils hostname traceroute nmap
+RUN dnf -y install iputils net-tools hostname traceroute nmap
 
 # X11 commands: coding
 RUN dnf -y install gitk ddd

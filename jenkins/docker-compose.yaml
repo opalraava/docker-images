@@ -2,6 +2,32 @@ version: '2'
 
 services:
 
+
+
+
+  gitserver:
+    build: gitserver
+    container_name: gitserver
+    restart: always
+    volumes:
+      - jenkins_repos:/home/git
+
+
+  shell:
+    build: shell
+    container_name: shell
+    restart: always
+    ports:
+      - "2233:22"
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
+    volumes:
+      - jenkins_user_home:/home/user
+
+
+
+
   jenkins:
     image: jenkins:latest
     restart: always
@@ -19,27 +45,36 @@ services:
     container_name: jsfedora
     restart: always
 
-  gitserver:
-    build: gitserver
-    container_name: gitserver
-    restart: always
-    volumes:
-      - jenkins_repos:/home/git
 
-  shell:
-    build: shell
-    container_name: shell
+
+  redmine:
+    image: redmine
+    container_name: redmine
+    environment:
+      REDMINE_DB_MYSQL: db
+      REDMINE_DB_PASSWORD: example
+    depends_on:
+      - db
     restart: always
-    ports:
-      - "2233:22"
-    cap_add:
-      - NET_ADMIN
-      - SYS_ADMIN
     volumes:
-      - jenkins_user_home:/home/user
+      - jenkins_redmine_files:/usr/src/redmine/files
+      - jenkins_repos:/var/git
+      
+  db:
+    image: mariadb
+    container_name: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: redmine
+    restart: always
+    volumes:
+      - jenkins_db:/var/lib/mysql
+
 
 volumes:
   jenkins_home:
   jenkins_repos:
   jenkins_user_home:
+  jenkins_db:
+  jenkins_redmine_files:
 
