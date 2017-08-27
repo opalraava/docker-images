@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+
+  blackarch:
+    build: blackarch
+    container_name: blackarch
+    restart: always
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
+    ports:
+      - "2244:22"
+    volumes:
+      - user_home:/home/user
+
+volumes:
+  user_home:
+
