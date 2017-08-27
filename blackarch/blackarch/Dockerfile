@@ -5,9 +5,10 @@ MAINTAINER Opal Raava <opalraava@riseup.net>
 RUN pacman -Syu --noconfirm
 
 # requirements: sshd
-RUN pacman -Syu --noconfirm openssh
+RUN pacman -Syu --noconfirm openssh vi vim
 RUN ssh-keygen -A
 RUN sed -Ei "s/^PermitRootLogin.*/PermitRootLogin no/" /etc/ssh/sshd_config
+RUN echo "X11Forwarding yes" >> /etc/ssh/sshd_config
 RUN mkdir -p /var/run/sshd
 
 # Create an unprivileged user; grant user guest sudo rights
@@ -35,6 +36,12 @@ RUN ./strap.sh
 #RUN pacman -S --needed --noprogressbar --noconfirm base-devel git; pacman -Scc --noprogressbar --noconfirm
 #RUN pacman -Syu --noconfirm vim
 #
+
+RUN pacman -Syu --noconfirm screen irssi links mc wget mutt zip unzip
+
+# X11
+RUN pacman -Syu --noconfirm xorg-xauth xorg-xhost xterm
+
 
 
 
