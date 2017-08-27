@@ -19,6 +19,7 @@ RUN adduser $username
 RUN dnf -y install passwd
 RUN echo "$username" | passwd --stdin $username
 RUN chown -R $username:$username /home/$username
+RUN chmod a+rx /home/$username
 
 # setup sudo for $username
 RUN dnf -y install sudo
