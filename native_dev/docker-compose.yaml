@@ -10,14 +10,14 @@ services:
     container_name: gitserver
     restart: always
     volumes:
-      - jenkins_repos:/home/git
+      - repos:/home/git
       
   gitweb:
     build: gitweb
     container_name: gitweb
     restart: always
     volumes:
-      - jenkins_repos:/var/lib/git
+      - repos:/var/lib/git
 
 
   shell:
@@ -30,7 +30,7 @@ services:
       - NET_ADMIN
       - SYS_ADMIN
     volumes:
-      - jenkins_user_home:/home/user
+      - user_home:/home/user
       - .:/var/parent
 
 
@@ -65,8 +65,8 @@ services:
       - db
     restart: always
     volumes:
-      - jenkins_redmine_files:/usr/src/redmine/files
-      - jenkins_repos:/var/git
+      - redmine_files:/usr/src/redmine/files
+      - repos:/var/git
       
   db:
     image: mariadb
@@ -76,7 +76,7 @@ services:
       MYSQL_DATABASE: redmine
     restart: always
     volumes:
-      - jenkins_db:/var/lib/mysql
+      - db:/var/lib/mysql
 
   phpmyadmin:
     depends_on:
@@ -94,8 +94,8 @@ services:
 
 volumes:
   jenkins_home:
-  jenkins_repos:
-  jenkins_user_home:
-  jenkins_db:
-  jenkins_redmine_files:
+  repos:
+  user_home:
+  db:
+  redmine_files:
 
