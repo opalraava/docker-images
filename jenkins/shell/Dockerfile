@@ -26,7 +26,7 @@ RUN echo "$username ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 
 # console commands: basic
-RUN dnf -y install screen irssi links mc wget mutt gnupg2
+RUN dnf -y install screen irssi links mc wget mutt gnupg2 zip unzip
 
 # networking commands: ip networking and internet
 RUN dnf -y install iputils net-tools hostname traceroute nmap
