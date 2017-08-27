@@ -1,8 +1,14 @@
 help :
-	@echo 'use: make build|showpass|up|remove|backup|bugout'
-	@echo '     make bash-jenkins|bash-debian|bash-fedora|bash-shell|bash-redmine|bash-db'
+	@echo 'use: make ssh | clean | all | up'
+	@echo '     make build|showpass|up|remove|backup|bugout'
+	@echo '     make bash-(jenkins|debian|fedora|shell|redmine|db)'
 
 all : build
+clean : remove
+
+ssh :
+	ssh -l user -p 2233 -X localhost
+
 build :
 	docker-compose build
 up :
@@ -27,6 +33,7 @@ bash-db :
 	docker exec -it db bash
 
 bugout : backup
+
 backup : remove
 	rm -f backup.tar backup.tar.gz
 	tar cvf backup.tar *

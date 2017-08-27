@@ -24,6 +24,7 @@ services:
       - SYS_ADMIN
     volumes:
       - jenkins_user_home:/home/user
+      - .:/var/parent
 
 
 
@@ -69,6 +70,7 @@ services:
     restart: always
     volumes:
       - jenkins_db:/var/lib/mysql
+
 
 
 volumes:
