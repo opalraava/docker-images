@@ -39,6 +39,7 @@ RUN apt-get -y install -t jessie-backports openjdk-8-jdk
 
 # c/c++ build environment
 RUN apt-get -y install build-essential git make autoconf automake libtool gettext pkg-config gcc g++
+RUN apt-get -y install mysql-client libmysqlclient-dev
 
 EXPOSE 22
 

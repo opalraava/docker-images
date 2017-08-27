@@ -29,7 +29,8 @@ RUN echo "$username ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 RUN dnf -y install java-1.8.0-openjdk-devel
 
 # c/c++ build environment
-RUN dnf -y install git make autoconf automake libtool gettext pkgconfig gcc gcc-c++
+RUN dnf -y install git make autoconf automake libtool gettext pkgconfig gcc gcc-c++ gdb flex bison mysql
+RUN dnf -y install mariadb-devel
 
 
 

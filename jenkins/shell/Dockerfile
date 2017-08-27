@@ -26,13 +26,14 @@ RUN echo "$username ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 
 # console commands: basic
-RUN dnf -y install screen irssi links mc wget mutt gnupg2 zip unzip
+RUN dnf -y install screen irssi links mc wget mutt gnupg2 zip unzip procps-ng
 
 # networking commands: ip networking and internet
 RUN dnf -y install iputils net-tools hostname traceroute nmap
 
 # coding commands: c/c++
-RUN dnf -y install git tig make autoconf automake libtool gettext gcc gcc-c++ gdb flex bison
+RUN dnf -y install git tig make autoconf automake libtool gettext gcc gcc-c++ gdb flex bison mysql
+RUN dnf -y install mariadb-devel
 
 # coding commands: java
 RUN dnf -y install java-1.8.0-openjdk-devel maven
