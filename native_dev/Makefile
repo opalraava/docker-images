@@ -7,7 +7,7 @@ all : build
 clean : remove
 
 ssh :
-	ssh -l user -p 2233 -X localhost
+	-ssh -l user -p 2233 -X localhost
 
 build :
 	docker-compose build

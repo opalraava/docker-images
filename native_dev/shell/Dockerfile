@@ -29,7 +29,7 @@ RUN echo "$username ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 RUN dnf -y install screen irssi links mc wget mutt gnupg2 zip unzip procps-ng
 
 # networking commands: ip networking and internet
-RUN dnf -y install iputils net-tools hostname traceroute nmap
+RUN dnf -y install shadow-utils iputils net-tools bind-utils hostname traceroute tcpdump nmap
 
 # coding commands: c/c++
 RUN dnf -y install git tig make autoconf automake libtool gettext gcc gcc-c++ gdb flex bison mysql
@@ -48,7 +48,9 @@ RUN dnf -y install xauth xterm gvim
 RUN dnf -y install keepassx emacs firefox thunderbird chromium xpdf gimp retext
 # X11 commands: coding
 RUN dnf -y install gitk ddd glx-utils glade
-
+# wireshark
+RUN dnf -y install wireshark wireshark-gtk
+RUN usermod -G wireshark user
 
 
 # trick to get access to my own docker config...

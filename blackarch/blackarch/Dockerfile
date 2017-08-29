@@ -14,6 +14,7 @@ RUN mkdir -p /var/run/sshd
 # Create an unprivileged user; grant user guest sudo rights
 RUN pacman -Syu --noconfirm sudo
 ENV username user
+
 RUN useradd -m $username && echo "$username ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/00-allowed
 #RUN echo "$username\n$username" | passwd $username
 RUN mkdir -p /home/$username
@@ -31,16 +32,15 @@ RUN chmod +x strap.sh
 RUN ./strap.sh
 
 
-#
-# Install base-devel
-#RUN pacman -S --needed --noprogressbar --noconfirm base-devel git; pacman -Scc --noprogressbar --noconfirm
-#RUN pacman -Syu --noconfirm vim
-#
+
 
 RUN pacman -Syu --noconfirm screen irssi links mc wget mutt zip unzip
+RUN pacman -Syu --noconfirm iputils net-tools
+RUN pacman -Syu --noconfirm base-devel git tig 
 
 # X11
 RUN pacman -Syu --noconfirm xorg-xauth xorg-xhost xterm
+RUN pacman -Syu --noconfirm 
 
 
 

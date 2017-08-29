@@ -2,7 +2,7 @@ help :
 	@echo 'use: make ssh | remove | build | up | backup | restore'
 
 ssh :
-	ssh -l user -p 2244 -X localhost
+	-ssh -l user -p 2244 -X localhost
 
 remove :
 	docker-compose down
