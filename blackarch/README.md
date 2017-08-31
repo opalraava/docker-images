@@ -23,7 +23,8 @@ Next you need to set the user password:
 sudo make up
 sudo make ssh
 ```
-In the container, specify user password:
+The last command will drop you in a root shell inside the
+container. In the container, specify the user password:
 ```
 passwd user
 exit
@@ -32,4 +33,9 @@ Now you can connect to the blackarch instance with ssh:
 ```
 make ssh
 ```
-And use the specified password to loging.
+And use the specified password to login.
+
+The Makefile contains many useful commands such as backup
+of volumes. The Makefile consists of simple commands and
+should be quite readable, and function as a reminder of
+how to do all the docker things.
