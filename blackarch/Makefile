@@ -28,8 +28,6 @@ restore :
 	docker run --rm --volumes-from gitserver -v `pwd`/tarballs:/backup fedora:latest tar xzf /backup/user_home.tar.gz
 	docker-compose up -d
 
-strap.sh :
+strap : 
 	curl -O https://blackarch.org/strap.sh
-blackarch/strap.sh : strap.sh
-	cp strap.sh blackarch/strap.sh
-strap : blackarch/strap.sh
+	mv strap.sh blackarch/strap.sh
