@@ -40,14 +40,15 @@ RUN ./strap.sh
 
 
 RUN pacman -Syu --noconfirm screen irssi links mc wget mutt zip unzip
-RUN pacman -Syu --noconfirm iputils net-tools netstat
-RUN pacman -Syu --noconfirm base-devel git tig 
+RUN pacman -Syu --noconfirm iputils net-tools traceroute nmap tcpdump bind-tools
+RUN pacman -Syu --noconfirm base-devel git tig autoconf automake libtool gettext gcc gdb flex bison
 
 # X11
-RUN pacman -Syu --noconfirm xorg-xauth xorg-xhost xterm firefox emacs gvim
+RUN pacman -Syu --noconfirm xorg-xauth xorg-xhost xterm firefox thunderbird emacs gvim keepassx xpdf gimp retext
+RUN pacman -Syu --noconfirm ddd wireshark-gtk
+RUN usermod -G wireshark user
+
 RUN pacman -Syu --noconfirm 
-
-
 
 
 

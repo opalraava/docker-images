@@ -32,7 +32,7 @@ RUN dnf -y install screen irssi links mc wget mutt gnupg2 zip unzip procps-ng
 RUN dnf -y install shadow-utils iputils net-tools bind-utils hostname traceroute tcpdump nmap
 
 # coding commands: c/c++
-RUN dnf -y install git tig make autoconf automake libtool gettext gcc gcc-c++ gdb flex bison mysql
+RUN dnf -y install git tig make autoconf automake libtool gettext gcc gcc-c++ gdb flex bison mysql python
 RUN dnf -y install mariadb-devel
 
 # coding commands: java
