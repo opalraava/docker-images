@@ -5,7 +5,7 @@ MAINTAINER Opal Raava <opalraava@riseup.net>
 RUN pacman -Syu --noconfirm
 
 # requirements: sshd
-RUN pacman -Syu --noconfirm openssh vi vim
+RUN pacman -Syu --noconfirm openssh
 RUN ssh-keygen -A
 RUN sed -Ei "s/^PermitRootLogin.*/PermitRootLogin no/" /etc/ssh/sshd_config
 RUN echo "X11Forwarding yes" >> /etc/ssh/sshd_config
@@ -26,8 +26,13 @@ RUN chmod a+rx /home/$username
 #RUN chmod +x strap.sh
 #RUN ./strap.sh
 
-# blackarch: this one works, found here: https://github.com/BlackArch/blackarch-site/pull/72
-RUN curl -O https://raw.githubusercontent.com/PedroSFreitas/blackarch-site/strap-sh-patch/strap.sh
+# blackarch: this one used work, found here: https://github.com/BlackArch/blackarch-site/pull/72
+#RUN curl -O https://raw.githubusercontent.com/PedroSFreitas/blackarch-site/strap-sh-#patch/strap.sh
+#RUN chmod +x strap.sh
+#RUN ./strap.sh
+
+# copy from a local copy
+COPY strap.sh /strap.sh
 RUN chmod +x strap.sh
 RUN ./strap.sh
 
@@ -35,11 +40,11 @@ RUN ./strap.sh
 
 
 RUN pacman -Syu --noconfirm screen irssi links mc wget mutt zip unzip
-RUN pacman -Syu --noconfirm iputils net-tools
+RUN pacman -Syu --noconfirm iputils net-tools netstat
 RUN pacman -Syu --noconfirm base-devel git tig 
 
 # X11
-RUN pacman -Syu --noconfirm xorg-xauth xorg-xhost xterm
+RUN pacman -Syu --noconfirm xorg-xauth xorg-xhost xterm firefox emacs gvim
 RUN pacman -Syu --noconfirm 
 
 

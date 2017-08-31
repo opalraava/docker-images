@@ -1,5 +1,5 @@
 help :
-	@echo 'use: make ssh | remove | build | up | backup | restore'
+	@echo 'use: make ssh | remove | build | up | backup | restore | strap'
 
 ssh :
 	-ssh -l user -p 2244 -X localhost
@@ -28,3 +28,8 @@ restore :
 	docker run --rm --volumes-from gitserver -v `pwd`/tarballs:/backup fedora:latest tar xzf /backup/user_home.tar.gz
 	docker-compose up -d
 
+strap.sh :
+	curl -O https://blackarch.org/strap.sh
+blackarch/strap.sh : strap.sh
+	cp strap.sh blackarch/strap.sh
+strap : blackarch/strap.sh
