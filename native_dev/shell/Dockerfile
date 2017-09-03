@@ -45,7 +45,7 @@ RUN dnf -y install java-1.8.0-openjdk-devel maven
 
 
 # enable X11
-RUN dnf -y install xauth xterm gvim
+RUN dnf -y install xauth xhost xterm gvim
 
 # X11 commands: basic
 RUN dnf -y install keepassx emacs firefox thunderbird chromium xpdf gimp retext

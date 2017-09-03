@@ -30,7 +30,7 @@ RUN dnf -y install screen irssi links mc wget mutt gnupg2 zip unzip procps-ng ht
 RUN dnf -y install shadow-utils iputils net-tools bind-utils hostname traceroute tcpdump nmap
 
 # enable X11
-RUN dnf -y install xauth xterm gvim \
+RUN dnf -y install xauth xhost xterm gvim \
     && dnf -y install keepassx emacs firefox # bare minimum.
 
 # wireshark

@@ -6,10 +6,13 @@ services:
     build: terminal
     container_name: terminal
     restart: always
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
     ports:
       - "2255:22"
     volumes:
-      - user_home: /home/user
+      - user_home:/home/user
 
 volumes:
   user_home:
