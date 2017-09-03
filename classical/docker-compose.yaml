@@ -1,0 +1,17 @@
+version : '2'
+
+services:
+
+  terminal:
+    build: terminal
+    container_name: terminal
+    restart: always
+    ports:
+      - "2255:22"
+    volumes:
+      - users: /home
+
+volumes:
+  users:
+
+
