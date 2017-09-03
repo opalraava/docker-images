@@ -25,8 +25,11 @@ RUN echo "$username ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 
 
+
+
+
 # console commands: basic
-RUN dnf -y install screen irssi links mc wget mutt gnupg2 zip unzip procps-ng
+RUN dnf -y install screen irssi links mc wget mutt gnupg2 zip unzip procps-ng htop
 
 # networking commands: ip networking and internet
 RUN dnf -y install shadow-utils iputils net-tools bind-utils hostname traceroute tcpdump nmap
@@ -56,6 +59,13 @@ RUN usermod -G wireshark user
 # trick to get access to my own docker config...
 RUN mkdir -p /var/parent
 VOLUME /var/parent
+
+
+
+
+
+
+
 
 VOLUME /home/$username
 EXPOSE 22

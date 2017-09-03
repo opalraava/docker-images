@@ -21,6 +21,8 @@ RUN mkdir -p /home/$username
 RUN chown -R $username:$username /home/$username
 RUN chmod a+rx /home/$username
 
+
+
 # Install blackarch repos... (OFFICIAL STEPS)
 #RUN curl -O https://blackarch.org/strap.sh
 #RUN chmod +x strap.sh
@@ -39,16 +41,19 @@ RUN ./strap.sh
 
 
 
-RUN pacman -Syu --noconfirm screen irssi links mc wget mutt zip unzip
-RUN pacman -Syu --noconfirm iputils net-tools traceroute nmap tcpdump bind-tools
+RUN pacman -Syu --noconfirm screen irssi links mc wget mutt htop zip unzip
+RUN pacman -Syu --noconfirm iputils net-tools traceroute nmap tcpdump bind-tools netcat
 RUN pacman -Syu --noconfirm base-devel git tig autoconf automake libtool gettext gcc gdb flex bison
 
 # X11
-RUN pacman -Syu --noconfirm xorg-xauth xorg-xhost xterm firefox thunderbird emacs gvim keepassx xpdf gimp retext
-RUN pacman -Syu --noconfirm ddd wireshark-gtk
+RUN pacman -Syu --noconfirm xorg-xauth xorg-xhost xterm firefox thunderbird emacs gvim keepassx gimp retext
+#RUN pacman -Syu --noconfirm xpdf ddd
+RUN pacman -Syu --noconfirm wireshark-gtk
 RUN usermod -G wireshark user
 
-RUN pacman -Syu --noconfirm 
+RUN pacman -Syu --noconfirm openvas-cli openvas-libraries openvas-manager
+RUN pacman -Syu --noconfirm vega
+#RUN pacman -Syu --noconfirm 
 
 
 
