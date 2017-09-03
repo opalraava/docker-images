@@ -9,9 +9,9 @@ services:
     ports:
       - "2255:22"
     volumes:
-      - users: /home
+      - user_home: /home/user
 
 volumes:
-  users:
+  user_home:
 
 
