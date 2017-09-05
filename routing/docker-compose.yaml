@@ -2,6 +2,19 @@ version : '2'
 
 services:
 
+  plain:
+    build: plain
+    container_name: router_plain
+    restart: always
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
+    networks:
+      - default
+      - internal
+    ports:
+      - "2266:22"
+
   terminal:
     build: terminal
     container_name: terminal
@@ -13,6 +26,12 @@ services:
       - "2255:22"
     volumes:
       - user_home:/home/user
+    networks:
+      - internal
+
+
+networks:
+  internal:
 
 volumes:
   user_home:

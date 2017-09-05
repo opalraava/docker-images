@@ -1,8 +1,11 @@
 help :
-	@echo 'use: make ssh | remove | build | up | backup | restore | strap'
+	@echo 'use: make ssh | remove | build | up | backup | restore'
 
 ssh :
 	-ssh -l user -p 2255 -X localhost
+
+ssh-plain :
+	-ssh -l user -p 2266 localhost
 
 remove :
 	docker-compose down
@@ -13,8 +16,11 @@ build :
 up :
 	docker-compose up -d
 
-terminal :
-	docker exec -it terminal bash
+exec-plain :
+	docker-compose exec plain sh
+
+exec-terminal :
+	docker-compose exec terminal bash
 
 backup :
 	docker-compose stop
