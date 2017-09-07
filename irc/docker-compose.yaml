@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+
+  ircd:
+    build: ircd
+    container_name: ircd
+    restart: always
+
+  terminal:
+    build: terminal
+    container_name: chatbox
+    restart: always
+    ports:
+      - "127.0.0.1:2277:22"
+    volumes:
+      - user_home:/home/user
+
+volumes:
+  user_home:
+
+
