@@ -6,8 +6,13 @@ help :
 all : build
 clean : remove
 
-ssh :
+ssh : ssh-debian
+
+ssh-fedora :
 	-ssh -l user -p 2233 -X localhost
+
+ssh-debian :
+	-ssh -l user -p 2234 -X localhost
 
 build :
 	docker-compose build
@@ -25,8 +30,10 @@ bash-debian :
 	docker exec -it jsdebian bash
 bash-fedora :
 	docker exec -it jsfedora bash
-bash-shell :
-	docker exec -it shell bash
+bash-terminal-fedora :
+	docker exec -it terminal_fedora bash
+bash-terminal-debain :
+	docker exec -it terminal_debian bash
 bash-redmine :
 	docker exec -it redmine bash
 bash-db :
@@ -38,20 +45,22 @@ bash-gitweb :
 
 backup :
 	docker-compose stop
-	docker run --rm --volumes-from gitserver -v `pwd`/tarballs:/backup fedora:latest tar czf /backup/gitserver.tar.gz /home/git
-	docker run --rm --volumes-from shell     -v `pwd`/tarballs:/backup fedora:latest tar czf /backup/shell.tar.gz /home/user
-	docker run --rm --volumes-from jenkins   -v `pwd`/tarballs:/backup fedora:latest tar czf /backup/jenkins.tar.gz /var/jenkins_home
-	docker run --rm --volumes-from redmine   -v `pwd`/tarballs:/backup fedora:latest tar czf /backup/redmine.tar.gz /usr/src/redmine/files
-	docker run --rm --volumes-from mariadb   -v `pwd`/tarballs:/backup fedora:latest tar czf /backup/mariadb.tar.gz /var/lib/mysql
+	docker run --rm --volumes-from gitserver -v `pwd`/tarballs:/backup alpine:latest tar czf /backup/gitserver.tar.gz /home/git
+#	docker run --rm --volumes-from terminal_fedora -v `pwd`/tarballs:/backup alpine:latest tar czf /backup/terminal_fedora.tar.gz /home/user
+	docker run --rm --volumes-from terminal_debian -v `pwd`/tarballs:/backup alpine:latest tar czf /backup/terminal_debian.tar.gz /home/user
+	docker run --rm --volumes-from jenkins   -v `pwd`/tarballs:/backup alpine:latest tar czf /backup/jenkins.tar.gz /var/jenkins_home
+	docker run --rm --volumes-from redmine   -v `pwd`/tarballs:/backup alpine:latest tar czf /backup/redmine.tar.gz /usr/src/redmine/files
+	docker run --rm --volumes-from mariadb   -v `pwd`/tarballs:/backup alpine:latest tar czf /backup/mariadb.tar.gz /var/lib/mysql
 	docker-compose up -d
 	sha256sum tarballs/*.gz > tarballs/sha256sum.txt
 
 restore :
 	sha256sum --status -c tarballs/sha256sum.txt
 	docker-compose stop
-	docker run --rm --volumes-from gitserver -v `pwd`/tarballs:/backup fedora:latest tar xzf /backup/gitserver.tar.gz
-	docker run --rm --volumes-from shell     -v `pwd`/tarballs:/backup fedora:latest tar xzf /backup/shell.tar.gz
-	docker run --rm --volumes-from jenkins   -v `pwd`/tarballs:/backup fedora:latest tar xzf /backup/jenkins.tar.gz
-	docker run --rm --volumes-from redmine   -v `pwd`/tarballs:/backup fedora:latest tar xzf /backup/redmine.tar.gz
-	docker run --rm --volumes-from mariadb   -v `pwd`/tarballs:/backup fedora:latest tar xzf /backup/mariadb.tar.gz
+	docker run --rm --volumes-from gitserver -v `pwd`/tarballs:/backup alpine:latest tar xzf /backup/gitserver.tar.gz
+#	docker run --rm --volumes-from terminal_fedora -v `pwd`/tarballs:/backup alpine:latest tar xzf /backup/terminal_fedora.tar.gz
+	docker run --rm --volumes-from terminal_debian -v `pwd`/tarballs:/backup alpine:latest tar xzf /backup/terminal_debian.tar.gz
+	docker run --rm --volumes-from jenkins   -v `pwd`/tarballs:/backup alpine:latest tar xzf /backup/jenkins.tar.gz
+	docker run --rm --volumes-from redmine   -v `pwd`/tarballs:/backup alpine:latest tar xzf /backup/redmine.tar.gz
+	docker run --rm --volumes-from mariadb   -v `pwd`/tarballs:/backup alpine:latest tar xzf /backup/mariadb.tar.gz
 	docker-compose up -d

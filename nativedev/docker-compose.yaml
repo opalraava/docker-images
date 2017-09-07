@@ -20,19 +20,35 @@ services:
       - repos:/var/lib/git
 
 
-  shell:
-    build: shell
-    container_name: shell
+# disabled: fedora package manager errors
+#
+#  terminal_fedora:
+#    build: terminal_fedora
+#    container_name: terminal_fedora
+#    restart: always
+#    ports:
+#      - "2233:22"
+#    cap_add:
+#      - NET_ADMIN
+#      - SYS_ADMIN
+#    volumes:
+#      - user_home:/home/user
+#      - .:/var/parent
+#
+
+
+  terminal_debian:
+    build: terminal_debian
+    container_name: terminal_debian
     restart: always
     ports:
-      - "2233:22"
+      - "2234:22"
     cap_add:
       - NET_ADMIN
       - SYS_ADMIN
     volumes:
       - user_home:/home/user
       - .:/var/parent
-
 
 
 
@@ -48,11 +64,13 @@ services:
     container_name: jsdebian
     restart: always
 
-  jsfedora:
-    build: jsfedora
-    container_name: jsfedora
-    restart: always
-
+# disabled: fedora package manager errors
+#
+#  jsfedora:
+#    build: jsfedora
+#    container_name: jsfedora
+#    restart: always
+#
 
 
   redmine:
