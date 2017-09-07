@@ -1,5 +1,5 @@
 # https://hub.docker.com/_/fedora/
-FROM fedora:latest
+FROM fedora:25
 MAINTAINER Opal Raava <opalraava@riseup.net>
 
 # system update
