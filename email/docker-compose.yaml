@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+
+  terminal:
+    build: email
+    container_name: email
+    restart: always
+    ports:
+      - "127.0.0.1:2288:22"
+    volumes:
+      - user_home:/home/user
+
+volumes:
+  user_home:
+
+

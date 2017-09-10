@@ -1,0 +1,12 @@
+version: '2'
+
+services:
+
+  www_stateful:
+    build: www_stateful
+    container_name: www_stateful
+    restart: always
+    ports:
+      - "127.0.0.1:2291:22"
+
+
