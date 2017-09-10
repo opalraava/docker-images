@@ -22,18 +22,18 @@ services:
 
 # disabled: fedora package manager errors
 #
-#  terminal_fedora:
-#    build: terminal_fedora
-#    container_name: terminal_fedora
-#    restart: always
-#    ports:
-#      - "2233:22"
-#    cap_add:
-#      - NET_ADMIN
-#      - SYS_ADMIN
-#    volumes:
-#      - user_home:/home/user
-#      - .:/var/parent
+  terminal_fedora:
+    build: terminal_fedora
+    container_name: terminal_fedora
+    restart: always
+    ports:
+      - "2233:22"
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
+    volumes:
+      - user_home:/home/user
+      - .:/var/parent
 #
 
 
@@ -66,10 +66,10 @@ services:
 
 # disabled: fedora package manager errors
 #
-#  jsfedora:
-#    build: jsfedora
-#    container_name: jsfedora
-#    restart: always
+  jsfedora:
+    build: jsfedora
+    container_name: jsfedora
+    restart: always
 #
 
 

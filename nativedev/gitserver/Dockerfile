@@ -17,7 +17,7 @@ RUN echo -n "" > /etc/motd
 # create non-privileged user
 ENV username git
 RUN echo "911conspiracy\n911conspiracy" | adduser -S -s /bin/sh $username
-RUN addgroup $username && addgroup $username $username && chown -R $username:$username /home/$username
+RUN mkdir -p /home/$username && addgroup $username && addgroup $username $username && chown -R $username:$username /home/$username
 RUN echo "$username ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 

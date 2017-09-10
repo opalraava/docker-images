@@ -1,6 +1,3 @@
-#!/bin/bash
+#!/bin/sh
 
-rm -f /run/nologin
-
-# Launching open-ssh server
-/usr/sbin/sshd -D
+exec "$@"
